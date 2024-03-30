@@ -13,7 +13,7 @@ pages:
   
   script:
     - npm run build-prod
-    - cp -a dist/. public/
+    - cp -a dist/project-dashboard/browser/. public/
 
   artifacts:
     paths:
