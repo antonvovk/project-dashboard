@@ -1,0 +1,46 @@
+<div class="mat-elevation-z8" style="height: 100%">
+    @if (loadingState !== 3) {
+        <div class="loading-shade">
+            <mat-spinner></mat-spinner>
+        </div>
+    }
+
+    <mat-table [dataSource]="getProjects()">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.id }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.name }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="springBootVersion">
+            <mat-header-cell *matHeaderCellDef>Spring Boot</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.springBootVersion }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="pomVersion">
+            <mat-header-cell *matHeaderCellDef>POM</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.pomVersion }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="javaVersion">
+            <mat-header-cell *matHeaderCellDef>Java</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.javaVersion }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="latestTag">
+            <mat-header-cell *matHeaderCellDef>Latest tag</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.latestTag }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="latestPipeline">
+            <mat-header-cell *matHeaderCellDef>Latest pipeline</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <a [class.failure]="element.latestPipelineStatus === 'failure'"
+                   [class.success]="element.latestPipelineStatus === 'success'"
+                   [href]="element.latestPipelineUrl"
+                   rel="noopener noreferrer"
+                   target="_blank">{{ element.latestPipelineStatus }}</a>
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>
